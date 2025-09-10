@@ -23,7 +23,7 @@ public class Service {
 
     @Builder
     private Service(UUID id, String name, String description, BigDecimal price, Duration duration, Company company,
-                    @Singular List<Employee> availableEmployees) {
+                    @Singular("availableEmployee") List<Employee> availableEmployees) {
         this.id = Objects.requireNonNull(id, "Service id cannot be null.");
         if(isBlank(name)) throw new ServiceValidationException("Service name cannot be null or empty.");
         this.name = name;

@@ -1,5 +1,6 @@
 package com.ania.appointly.domain.model;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -7,6 +8,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Getter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Reservation {
     private final UUID id;
     private final User user;

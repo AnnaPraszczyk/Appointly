@@ -9,7 +9,9 @@ import java.util.Objects;
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ScheduleSlot {
+    @EqualsAndHashCode.Include
     private final DayOfWeek day;
+    @EqualsAndHashCode.Include
     private final LocalTime time;
     private final boolean available;
 

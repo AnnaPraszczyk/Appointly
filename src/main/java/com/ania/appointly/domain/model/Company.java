@@ -1,6 +1,7 @@
 package com.ania.appointly.domain.model;
 import com.ania.appointly.domain.exeptions.CompanyValidationException;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Singular;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Objects;
 import java.util.UUID;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 public class Company {
     private final UUID id;

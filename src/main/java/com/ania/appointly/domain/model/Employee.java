@@ -1,6 +1,7 @@
 package com.ania.appointly.domain.model;
 import com.ania.appointly.domain.exeptions.EmployeeValidationException;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Singular;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.UUID;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 @Getter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Employee {
     private final UUID id;
     private final String firstName;
@@ -22,7 +24,9 @@ public class Employee {
 
     @Builder
     private Employee(UUID id, String firstName, String lastName, String email, String phoneNumber, Company company,
-                     @Singular List<String> specializations, @Singular List<ScheduleSlot> schedule, @Singular List<Reservation> reservations ) {
+                     @Singular("specialization") List<String> specializations,
+                     @Singular("scheduleSlot") List<ScheduleSlot> schedule,
+                     @Singular("reservation") List<Reservation> reservations ) {
         this.id = Objects.requireNonNull(id, "Employee id cannot be null.");
         if(isBlank(firstName)) throw new EmployeeValidationException("Employee first name cannot be null or empty.");
         this.firstName = firstName;
