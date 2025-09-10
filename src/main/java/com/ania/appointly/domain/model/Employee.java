@@ -1,0 +1,40 @@
+package com.ania.appointly.domain.model;
+import com.ania.appointly.domain.exeptions.EmployeeValidationException;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Singular;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
+@Getter
+public class Employee {
+    private final UUID id;
+    private final String firstName;
+    private final String lastName;
+    private final String email;
+    private final String phoneNumber;
+    private final Company company;
+    private final List<String> specializations;
+    private final List<ScheduleSlot> schedule;
+    private final List<Reservation> reservations;
+
+    @Builder
+    private Employee(UUID id, String firstName, String lastName, String email, String phoneNumber, Company company,
+                     @Singular List<String> specializations, @Singular List<ScheduleSlot> schedule, @Singular List<Reservation> reservations ) {
+        this.id = Objects.requireNonNull(id, "Employee id cannot be null.");
+        if(isBlank(firstName)) throw new EmployeeValidationException("Employee first name cannot be null or empty.");
+        this.firstName = firstName;
+        if(isBlank(lastName)) throw new EmployeeValidationException("Employee last name cannot be null or empty.");
+        this.lastName = lastName;
+        if(isBlank(email)) throw new EmployeeValidationException("Employee email cannot be null or empty.");
+        this.email = email;
+        if(isBlank(phoneNumber)) throw new EmployeeValidationException("Employee phone number cannot be null or empty.");
+        this.phoneNumber = phoneNumber;
+        this.company = Objects.requireNonNull(company, "Employee company cannot be null.");
+        this.specializations = List.copyOf(specializations != null ? specializations : List.of());
+        this.schedule = List.copyOf(schedule != null ? schedule : List.of());
+        this.reservations = List.copyOf(reservations != null ? reservations : List.of());
+    }
+}
