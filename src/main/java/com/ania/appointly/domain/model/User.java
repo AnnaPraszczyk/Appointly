@@ -17,8 +17,10 @@ public class User {
     private Company company;
 
     @Builder
-    private User(UUID id, String firstName, String lastName, String email, String phoneNumber, Role role, Company company) {
-        this.id = Objects.requireNonNull(id, "User id cannot be null.");
+    private User(UUID id, String firstName, String lastName, String email, String phoneNumber, Role role,
+                 Company company) {
+        if (id == null) throw new UserValidationException("User id cannot be null.");
+        this.id = id;
         if(isBlank(firstName)) throw new UserValidationException("User first name cannot be null or empty.");
         this.firstName = firstName;
         if(isBlank(lastName)) throw new UserValidationException("User last name cannot be null or empty.");

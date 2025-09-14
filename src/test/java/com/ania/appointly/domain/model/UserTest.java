@@ -123,7 +123,7 @@ class UserTest {
 
     @Test
     void throwExceptionWhenIdIsNull() {
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(UserValidationException.class, () ->
                 User.builder()
                         .id(null)
                         .firstName("Anna")

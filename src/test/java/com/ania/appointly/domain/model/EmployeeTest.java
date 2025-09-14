@@ -85,7 +85,7 @@ class EmployeeTest {
     }
     @Test
     void throwExceptionWhenCompanyIsNull() {
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(EmployeeValidationException.class, () ->
                 Employee.builder()
                         .id(validId)
                         .firstName("Anna")
@@ -138,7 +138,6 @@ class EmployeeTest {
     @Test
     void compareEmployeesById() {
         UUID id = UUID.randomUUID();
-
         Employee e1 = Employee.builder()
                 .id(id)
                 .firstName("Anna")
@@ -147,7 +146,6 @@ class EmployeeTest {
                 .phoneNumber("123")
                 .company(mockCompany())
                 .build();
-
         Employee e2 = Employee.builder()
                 .id(id)
                 .firstName("Other")
@@ -200,8 +198,8 @@ class EmployeeTest {
                 .role(Role.CLIENT)
                 .build();
     }
-    private Service mockService() {
-        return Service.builder()
+    private OfferedService mockService() {
+        return OfferedService.builder()
                 .id(UUID.randomUUID())
                 .name("Haircut")
                 .description("Basic haircut")

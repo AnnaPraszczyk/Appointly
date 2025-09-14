@@ -5,13 +5,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Singular;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Employee {
+    @EqualsAndHashCode.Include
     private final UUID id;
     private final String firstName;
     private final String lastName;
@@ -27,7 +27,8 @@ public class Employee {
                      @Singular("specialization") List<String> specializations,
                      @Singular("scheduleSlot") List<ScheduleSlot> schedule,
                      @Singular("reservation") List<Reservation> reservations ) {
-        this.id = Objects.requireNonNull(id, "Employee id cannot be null.");
+        if (id == null) throw new EmployeeValidationException("Employee id cannot be null.");
+        this.id = id;
         if(isBlank(firstName)) throw new EmployeeValidationException("Employee first name cannot be null or empty.");
         this.firstName = firstName;
         if(isBlank(lastName)) throw new EmployeeValidationException("Employee last name cannot be null or empty.");
@@ -36,7 +37,8 @@ public class Employee {
         this.email = email;
         if(isBlank(phoneNumber)) throw new EmployeeValidationException("Employee phone number cannot be null or empty.");
         this.phoneNumber = phoneNumber;
-        this.company = Objects.requireNonNull(company, "Employee company cannot be null.");
+        if (company == null) throw new EmployeeValidationException("Employee must have a company");
+        this.company = company;
         this.specializations = List.copyOf(specializations != null ? specializations : List.of());
         this.schedule = List.copyOf(schedule != null ? schedule : List.of());
         this.reservations = List.copyOf(reservations != null ? reservations : List.of());

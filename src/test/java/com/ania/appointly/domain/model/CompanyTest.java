@@ -83,7 +83,7 @@ class CompanyTest {
     }
     @Test
     void copyServicesAndEmployeesSafely() {
-        Service service = Service.builder()
+        OfferedService service = OfferedService.builder()
                 .id(UUID.randomUUID())
                 .name("Consulting")
                 .description("IT consulting")
@@ -195,8 +195,8 @@ class CompanyTest {
                 .build();
     }
 
-    private Service mockService() {
-        return Service.builder()
+    private OfferedService mockService() {
+        return OfferedService.builder()
                 .id(UUID.randomUUID())
                 .name("Consulting")
                 .description("IT consulting service")

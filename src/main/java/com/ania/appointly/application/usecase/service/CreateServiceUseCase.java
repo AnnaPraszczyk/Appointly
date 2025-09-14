@@ -1,6 +1,6 @@
 package com.ania.appointly.application.usecase.service;
-import com.ania.appointly.domain.model.Service;
+import com.ania.appointly.domain.model.OfferedService;
 
 public interface CreateServiceUseCase {
-    Service createService(Service service);
+    OfferedService createService(OfferedService service);
 }

@@ -6,11 +6,11 @@ import java.time.Duration;
 import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
-class ServiceTest {
+class OfferedServiceTest {
     private final UUID validId = UUID.randomUUID();
     @Test
     void shouldCreateServiceWithValidData() {
-        Service service = Service.builder()
+        OfferedService service = OfferedService.builder()
                 .id(validId)
                 .name("Haircut")
                 .description("Basic haircut service")
@@ -30,7 +30,7 @@ class ServiceTest {
     @Test
     void throwExceptionWhenNameIsBlank() {
         assertThrows(ServiceValidationException.class, () ->
-                Service.builder()
+                OfferedService.builder()
                         .id(validId)
                         .name(" ")
                         .description("desc")
@@ -43,7 +43,7 @@ class ServiceTest {
     @Test
     void throwExceptionWhenDescriptionIsBlank() {
         assertThrows(ServiceValidationException.class, () ->
-                Service.builder()
+                OfferedService.builder()
                         .id(validId)
                         .name("Haircut")
                         .description(" ")
@@ -55,8 +55,8 @@ class ServiceTest {
 
     @Test
     void throwExceptionWhenIdIsNull() {
-        assertThrows(NullPointerException.class, () ->
-                Service.builder()
+        assertThrows(ServiceValidationException.class, () ->
+                OfferedService.builder()
                         .id(null)
                         .name("Haircut")
                         .description("desc")
@@ -68,8 +68,8 @@ class ServiceTest {
 
     @Test
     void throwExceptionWhenPriceIsNull() {
-        assertThrows(NullPointerException.class, () ->
-                Service.builder()
+        assertThrows(ServiceValidationException.class, () ->
+                OfferedService.builder()
                         .id(validId)
                         .name("Haircut")
                         .description("desc")
@@ -81,8 +81,8 @@ class ServiceTest {
 
     @Test
     void throwExceptionWhenDurationIsNull() {
-        assertThrows(NullPointerException.class, () ->
-                Service.builder()
+        assertThrows(ServiceValidationException.class, () ->
+                OfferedService.builder()
                         .id(validId)
                         .name("Haircut")
                         .description("desc")
@@ -94,8 +94,8 @@ class ServiceTest {
 
     @Test
     void throwExceptionWhenCompanyIsNull() {
-        assertThrows(NullPointerException.class, () ->
-                Service.builder()
+        assertThrows(ServiceValidationException.class, () ->
+                OfferedService.builder()
                         .id(validId)
                         .name("Haircut")
                         .description("desc")
@@ -107,7 +107,7 @@ class ServiceTest {
 
     @Test
     void returnUnmodifiableAvailableEmployeesList() {
-        Service service = Service.builder()
+        OfferedService service = OfferedService.builder()
                 .id(validId)
                 .name("Haircut")
                 .description("desc")
@@ -124,7 +124,7 @@ class ServiceTest {
 
     @Test
     void createServiceWithMultipleAvailableEmployees() {
-        Service service = Service.builder()
+        OfferedService service = OfferedService.builder()
                 .id(validId)
                 .name("Haircut")
                 .description("desc")

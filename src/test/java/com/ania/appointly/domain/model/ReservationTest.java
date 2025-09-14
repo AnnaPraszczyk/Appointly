@@ -160,8 +160,8 @@ class ReservationTest {
                 .phone("000-000-000")
                 .build();
     }
-    private Service mockService() {
-        return Service.builder()
+    private OfferedService mockService() {
+        return OfferedService.builder()
                 .id(UUID.randomUUID())
                 .name("Haircut")
                 .description("Basic haircut")
