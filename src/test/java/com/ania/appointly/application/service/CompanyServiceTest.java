@@ -4,11 +4,13 @@ import com.ania.appointly.domain.model.Company;
 import com.ania.appointly.infrastructure.inmemory.InMemoryCompanyRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
+@ActiveProfiles("test")
 class CompanyServiceTest {
     private CompanyService companyService;
     private InMemoryCompanyRepository companyRepository;

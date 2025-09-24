@@ -46,6 +46,11 @@ public class OfferedServiceService implements CreateServiceUseCase, ReadServiceU
     }
 
     @Override
+    public Optional<OfferedService> getServiceByName(String name) {
+        return serviceRepository.findByName(name);
+    }
+
+    @Override
     public OfferedService updateService(OfferedService service) {
         if (!serviceRepository.existsById(service.getId())) {
             throw new ServiceValidationException("Cannot update non-existing service.");

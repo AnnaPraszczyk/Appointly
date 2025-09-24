@@ -6,12 +6,15 @@ import com.ania.appointly.domain.model.ScheduleSlot;
 import com.ania.appointly.infrastructure.inmemory.InMemoryEmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
+
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
+@ActiveProfiles("test")
 class EmployeeServiceTest {
     private EmployeeService employeeService;
     private InMemoryEmployeeRepository employeeRepository;

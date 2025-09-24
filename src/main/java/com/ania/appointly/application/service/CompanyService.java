@@ -14,7 +14,9 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class CompanyService implements CreateCompanyUseCase, ReadCompanyUseCase, UpdateCompanyUseCase, DeleteCompanyUseCase {
+public class CompanyService implements CreateCompanyUseCase,
+        ReadCompanyUseCase, UpdateCompanyUseCase,
+        DeleteCompanyUseCase {
     private final CompanyRepository companyRepository;
 
     @Override
@@ -33,6 +35,21 @@ public class CompanyService implements CreateCompanyUseCase, ReadCompanyUseCase,
     @Override
     public Optional<Company> getCompanyById(UUID id) {
         return companyRepository.findById(id);
+    }
+
+    @Override
+    public Optional<Company> getCompanyByName(String name) {
+        return companyRepository.findByName(name);
+    }
+
+    @Override
+    public boolean existsCompanyByName(String name) {
+        return companyRepository.existsByName(name);
+    }
+
+    @Override
+    public Optional<Company> getCompanyByPhone(String phone) {
+        return companyRepository.findByPhone(phone);
     }
 
     @Override

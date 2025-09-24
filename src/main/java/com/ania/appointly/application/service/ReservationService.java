@@ -2,11 +2,12 @@ package com.ania.appointly.application.service;
 import com.ania.appointly.application.usecase.reservation.CreateReservationUseCase;
 import com.ania.appointly.application.usecase.reservation.DeleteReservationUseCase;
 import com.ania.appointly.application.usecase.reservation.ReadReservationUseCase;
-import com.ania.appointly.application.usecase.reservation.UpdateResevationUseCase;
+import com.ania.appointly.application.usecase.reservation.UpdateReservationUseCase;
 import com.ania.appointly.domain.exeptions.ReservationValidationException;
 import com.ania.appointly.domain.model.Reservation;
 import com.ania.appointly.domain.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.util.List;
@@ -15,13 +16,16 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class ReservationService implements CreateReservationUseCase, ReadReservationUseCase, UpdateResevationUseCase, DeleteReservationUseCase {
+public class ReservationService implements CreateReservationUseCase, ReadReservationUseCase, UpdateReservationUseCase, DeleteReservationUseCase {
     private final ReservationRepository reservationRepository;
 
     @Override
     public Reservation createReservation(Reservation reservation) {
         if (reservationRepository.existsById(reservation.getId())) {
             throw new ReservationValidationException("Reservation with this ID already exists.");
+        }
+        if (reservationRepository.existsByEmployeeIdAndDateTime(reservation.getEmployee().getId(), reservation.getDateTime())) {
+            throw new ReservationValidationException("Employee already has a reservation at this time.");
         }
         return reservationRepository.save(reservation);
     }
@@ -57,9 +61,20 @@ public class ReservationService implements CreateReservationUseCase, ReadReserva
     }
 
     @Override
+    public List<Reservation> getPagedReservations(Pageable pageable) {
+        return reservationRepository.findAllPaged(pageable);
+    }
+
+    @Override
     public Reservation updateReservation(Reservation reservation) {
         if (!reservationRepository.existsById(reservation.getId())) {
             throw new ReservationValidationException("Cannot update non-existing reservation.");
+        }
+        List<Reservation> existing = reservationRepository.findByEmployeeId(reservation.getEmployee().getId()).stream()
+                .filter(r -> r.getDateTime().equals(reservation.getDateTime()) && !r.getId().equals(reservation.getId()))
+                .toList();
+        if (!existing.isEmpty()) {
+            throw new ReservationValidationException("Employee already has a reservation at this time.");
         }
         return reservationRepository.save(reservation);
     }

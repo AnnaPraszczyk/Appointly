@@ -1,11 +1,14 @@
 package com.ania.appointly.infrastructure.inmemory;
 import com.ania.appointly.domain.model.Employee;
 import com.ania.appointly.domain.repository.EmployeeRepository;
+import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
+@Profile("test")
 public class InMemoryEmployeeRepository implements EmployeeRepository {
 
     private final Map<UUID, Employee> storage = new HashMap<>();
@@ -44,6 +47,18 @@ public class InMemoryEmployeeRepository implements EmployeeRepository {
                 .filter(e -> e.getSpecializations().contains(specialization))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Employee> findAllPaged(Pageable pageable) {
+        List<Employee> all = findAll();
+        int start = (int) pageable.getOffset();
+        int end = Math.min(start + pageable.getPageSize(), all.size());
+        if (start > end) {
+            return Collections.emptyList();
+        }
+        return all.subList(start, end);
+    }
+
 
     @Override
     public void deleteById(UUID id) {

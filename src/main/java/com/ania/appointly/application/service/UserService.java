@@ -8,6 +8,7 @@ import com.ania.appointly.domain.model.Role;
 import com.ania.appointly.domain.model.User;
 import com.ania.appointly.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -60,6 +61,11 @@ public class UserService implements
             throw new UserValidationException("User with this ID does not exist.");
         }
         return userRepository.save(user);
+    }
+
+    @Override
+    public List<User> getUsersPaged(Pageable pageable) {
+        return userRepository.findAllPaged(pageable);
     }
 
     @Override

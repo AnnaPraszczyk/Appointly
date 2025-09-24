@@ -6,11 +6,13 @@ import com.ania.appointly.domain.model.User;
 import com.ania.appointly.infrastructure.inmemory.InMemoryUserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
+@ActiveProfiles("test")
 class UserServiceTest {
     private UserService userService;
     private InMemoryUserRepository userRepository;

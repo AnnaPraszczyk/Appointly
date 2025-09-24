@@ -1,12 +1,15 @@
 package com.ania.appointly.infrastructure.inmemory;
 import com.ania.appointly.domain.model.Reservation;
 import com.ania.appointly.domain.repository.ReservationRepository;
+import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
+@Profile("test")
 public class InMemoryReservationRepository implements ReservationRepository {
     private final Map<UUID, Reservation> storage = new HashMap<>();
 
@@ -49,6 +52,23 @@ public class InMemoryReservationRepository implements ReservationRepository {
         return storage.values().stream()
                 .filter(r -> !r.getDateTime().isBefore(from) && !r.getDateTime().isAfter(to))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean existsByEmployeeIdAndDateTime(UUID employeeId, Instant dateTime) {
+        return storage.values().stream()
+                .anyMatch(r -> r.getEmployee().getId().equals(employeeId) && r.getDateTime().equals(dateTime));
+    }
+
+    @Override
+    public List<Reservation> findAllPaged(Pageable pageable) {
+        List<Reservation> all = findAll();
+        int start = (int) pageable.getOffset();
+        int end = Math.min(start + pageable.getPageSize(), all.size());
+        if (start > end) {
+            return Collections.emptyList();
+        }
+        return all.subList(start, end);
     }
 
     @Override

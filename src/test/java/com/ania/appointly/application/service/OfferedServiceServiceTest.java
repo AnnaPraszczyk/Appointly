@@ -6,6 +6,7 @@ import com.ania.appointly.domain.model.OfferedService;
 import com.ania.appointly.infrastructure.inmemory.InMemoryServiceRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import static org.junit.jupiter.api.Assertions.*;
 
+@ActiveProfiles("test")
 class OfferedServiceServiceTest {
     private OfferedServiceService serviceService;
     private InMemoryServiceRepository serviceRepository;

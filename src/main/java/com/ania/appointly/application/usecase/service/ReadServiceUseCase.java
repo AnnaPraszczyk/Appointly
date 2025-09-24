@@ -9,4 +9,5 @@ public interface ReadServiceUseCase {
     List<OfferedService> getAllServices();
     List<OfferedService> getServicesByCompany(UUID companyId);
     List<OfferedService> getServicesByEmployee(UUID employeeId);
+    Optional<OfferedService> getServiceByName(String name);
 }

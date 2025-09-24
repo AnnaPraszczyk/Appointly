@@ -4,12 +4,14 @@ import com.ania.appointly.domain.model.*;
 import com.ania.appointly.infrastructure.inmemory.InMemoryReservationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@ActiveProfiles("test")
 class ReservationServiceTest {
     private ReservationService reservationService;
     private InMemoryReservationRepository reservationRepository;

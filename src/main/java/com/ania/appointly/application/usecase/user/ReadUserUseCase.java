@@ -1,6 +1,8 @@
 package com.ania.appointly.application.usecase.user;
 import com.ania.appointly.domain.model.Role;
 import com.ania.appointly.domain.model.User;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -11,4 +13,5 @@ public interface ReadUserUseCase {
     List<User> getAllUsers();
     List<User> getUsersByCompany(UUID companyId);
     List<User> getUsersByRole(Role role);
+    List<User> getUsersPaged(Pageable pageable);
 }

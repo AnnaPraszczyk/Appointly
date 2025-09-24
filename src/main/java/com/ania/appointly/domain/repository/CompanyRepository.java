@@ -11,4 +11,7 @@ public interface CompanyRepository {
     List<Company> findAll();
     Company update(Company company);
     void deleteById(UUID id);
+    Optional<Company> findByName(String name);
+    boolean existsByName(String name);
+    Optional<Company> findByPhone(String phone);
 }

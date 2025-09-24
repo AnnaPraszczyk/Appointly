@@ -7,5 +7,8 @@ import java.util.UUID;
 public interface ReadCompanyUseCase {
     boolean existsCompanyById(UUID id);
     Optional<Company> getCompanyById(UUID id);
+    Optional<Company> getCompanyByName(String name);
+    boolean existsCompanyByName(String name);
+    Optional<Company> getCompanyByPhone(String phone);
     List<Company> getAllCompanies();
 }

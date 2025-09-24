@@ -1,5 +1,6 @@
 package com.ania.appointly.application.usecase.reservation;
 import com.ania.appointly.domain.model.Reservation;
+import org.springframework.data.domain.Pageable;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
@@ -11,4 +12,5 @@ public interface ReadReservationUseCase {
     List<Reservation> getReservationsByUser(UUID userId);
     List<Reservation> getReservationsByEmployee(UUID employeeId);
     List<Reservation> getReservationsBetween(Instant from, Instant to);
+    List<Reservation> getPagedReservations(Pageable pageable);
 }
