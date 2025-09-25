@@ -32,5 +32,4 @@ public class CompanyEntity {
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EmployeeEntity> employees = new ArrayList<>();
-
 }
