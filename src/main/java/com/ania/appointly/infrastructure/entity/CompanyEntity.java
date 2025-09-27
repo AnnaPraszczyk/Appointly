@@ -27,9 +27,12 @@ public class CompanyEntity {
 
     @Column(name = "phone", nullable = false)
     private String phone;
+
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<OfferedServiceEntity> services = new ArrayList<>();
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<EmployeeEntity> employees = new ArrayList<>();
 }

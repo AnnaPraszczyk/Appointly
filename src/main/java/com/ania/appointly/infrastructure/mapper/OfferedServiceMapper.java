@@ -2,6 +2,9 @@ package com.ania.appointly.infrastructure.mapper;
 import com.ania.appointly.domain.model.OfferedService;
 import com.ania.appointly.infrastructure.entity.OfferedServiceEntity;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -29,7 +32,7 @@ public class OfferedServiceMapper {
                 .price(entity.getPrice())
                 .duration(entity.getDuration())
                 .company(mappers.companyMapper.toDomain(entity.getCompany(), mappers))
-                .availableEmployees(entity.getAvailableEmployees().stream()
+                .availableEmployees(Optional.ofNullable(entity.getAvailableEmployees()).orElse(List.of()).stream()
                         .map(e -> mappers.employeeMapper.toDomain(e, mappers))
                         .collect(Collectors.toList()))
                 .build();

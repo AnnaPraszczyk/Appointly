@@ -2,6 +2,9 @@ package com.ania.appointly.infrastructure.mapper;
 import com.ania.appointly.domain.model.Company;
 import com.ania.appointly.infrastructure.entity.CompanyEntity;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -30,10 +33,10 @@ public class CompanyMapper {
                 .description(entity.getDescription())
                 .address(entity.getAddress())
                 .phone(entity.getPhone())
-                .services(entity.getServices().stream()
+                .services(Optional.ofNullable(entity.getServices()).orElse(List.of()).stream()
                         .map(service -> mappers.serviceMapper.toDomain(service, mappers))
                         .collect(Collectors.toList()))
-                .employees(entity.getEmployees().stream()
+                .employees(Optional.ofNullable(entity.getEmployees()).orElse(List.of()).stream()
                         .map(employee -> mappers.employeeMapper.toDomain(employee, mappers))
                         .collect(Collectors.toList()))
                 .build();

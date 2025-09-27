@@ -152,7 +152,7 @@ class OfferedServiceTest {
         return Employee.builder()
                 .id(UUID.randomUUID())
                 .firstName("Anna")
-                .lastName("Kowalska")
+                .lastName("Nowak")
                 .email("anna@example.com")
                 .phoneNumber("555-123")
                 .company(mockCompany())

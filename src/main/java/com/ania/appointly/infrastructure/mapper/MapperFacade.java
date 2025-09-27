@@ -1,5 +1,4 @@
 package com.ania.appointly.infrastructure.mapper;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -4,6 +4,7 @@ import com.ania.appointly.infrastructure.entity.EmployeeEntity;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -37,11 +38,11 @@ public class EmployeeMapper {
                 .email(entity.getEmail())
                 .phoneNumber(entity.getPhoneNumber())
                 .company(mappers.companyMapper.toDomain(entity.getCompany(), mappers))
-                .specializations(List.copyOf(entity.getSpecializations()))
-                .schedule(entity.getSchedule().stream()
+                .specializations(Optional.ofNullable(entity.getSpecializations()).orElse(List.of()))
+                .schedule(Optional.ofNullable(entity.getSchedule()).orElse(List.of()).stream()
                         .map(mappers.scheduleSlotMapper::toDomain)
                         .collect(Collectors.toList()))
-                .reservations(entity.getReservations().stream()
+                .reservations(Optional.ofNullable(entity.getReservations()).orElse(List.of()).stream()
                         .map(reservation -> mappers.reservationMapper.toDomain(reservation, mappers))
                         .collect(Collectors.toList()))
                 .build();

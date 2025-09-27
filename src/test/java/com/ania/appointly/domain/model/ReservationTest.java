@@ -1,4 +1,5 @@
 package com.ania.appointly.domain.model;
+import com.ania.appointly.domain.exeptions.ReservationValidationException;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.time.Duration;
@@ -36,7 +37,7 @@ class ReservationTest {
 
     @Test
     void throwExceptionWhenIdIsNull() {
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(ReservationValidationException.class, () ->
                 Reservation.builder()
                         .id(null)
                         .user(mockUser())
@@ -51,7 +52,7 @@ class ReservationTest {
 
     @Test
     void throwExceptionWhenUserIsNull() {
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(ReservationValidationException.class, () ->
                 Reservation.builder()
                         .id(validId)
                         .user(null)
@@ -66,7 +67,7 @@ class ReservationTest {
 
     @Test
     void throwExceptionWhenServiceIsNull() {
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(ReservationValidationException.class, () ->
                 Reservation.builder()
                         .id(validId)
                         .user(mockUser())
@@ -81,7 +82,7 @@ class ReservationTest {
 
     @Test
     void throwExceptionWhenEmployeeIsNull() {
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(ReservationValidationException.class, () ->
                 Reservation.builder()
                         .id(validId)
                         .user(mockUser())
@@ -96,7 +97,7 @@ class ReservationTest {
     }
     @Test
     void throwExceptionWhenDateTimeIsNull() {
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(ReservationValidationException.class, () ->
                 Reservation.builder()
                         .id(validId)
                         .user(mockUser())
@@ -111,7 +112,7 @@ class ReservationTest {
     }
     @Test
     void throwExceptionWhenPriceIsNull() {
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(ReservationValidationException.class, () ->
                 Reservation.builder()
                         .id(validId)
                         .user(mockUser())
@@ -126,7 +127,7 @@ class ReservationTest {
     }
     @Test
     void throwExceptionWhenTotalPriceIsNull() {
-        assertThrows(NullPointerException.class, () ->
+        assertThrows(ReservationValidationException.class, () ->
                 Reservation.builder()
                         .id(validId)
                         .user(mockUser())

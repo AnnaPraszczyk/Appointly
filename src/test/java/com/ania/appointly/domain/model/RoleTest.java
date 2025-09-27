@@ -8,15 +8,17 @@ class RoleTest {
     void returnCorrectDisplayNames() {
         assertEquals("Client", Role.CLIENT.getDisplayName());
         assertEquals("Provider", Role.PROVIDER.getDisplayName());
+        assertEquals("Employee", Role.EMPLOYEE.getDisplayName());
         assertEquals("Admin", Role.ADMIN.getDisplayName());
     }
 
     @Test
     void containAllRoles() {
         Role[] roles = Role.values();
-        assertEquals(3, roles.length);
+        assertEquals(4, roles.length);
         assertTrue(List.of(roles).contains(Role.CLIENT));
         assertTrue(List.of(roles).contains(Role.PROVIDER));
+        assertTrue(List.of(roles).contains(Role.EMPLOYEE));
         assertTrue(List.of(roles).contains(Role.ADMIN));
     }
 
@@ -24,6 +26,7 @@ class RoleTest {
     void convertFromStringCorrectly() {
         assertEquals(Role.CLIENT, Role.valueOf("CLIENT"));
         assertEquals(Role.PROVIDER, Role.valueOf("PROVIDER"));
+        assertEquals(Role.EMPLOYEE, Role.valueOf("EMPLOYEE"));
         assertEquals(Role.ADMIN, Role.valueOf("ADMIN"));
     }
 

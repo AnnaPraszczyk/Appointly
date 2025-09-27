@@ -23,7 +23,7 @@ public class Reservation {
 
     @Builder
     private Reservation(UUID id, User user, OfferedService service, Employee employee, Instant dateTime,
-                        BigDecimal price, BigDecimal totalPrice, Instant createdAt) {
+                        BigDecimal price, BigDecimal totalPrice, Instant createdAt, ReservationStatus status) {
         if (id == null) throw new ReservationValidationException("Reservation id cannot be null.");
         this.id = id;
         if (user == null) throw new ReservationValidationException("Reservation user cannot be null.");
@@ -38,7 +38,7 @@ public class Reservation {
         this.price = price;
         if (totalPrice == null) throw new ReservationValidationException("Reservation total price cannot be null.");
         this.totalPrice = totalPrice;
-        this.status = ReservationStatus.PENDING;
-        this.createdAt = Instant.now();
+        this.createdAt = createdAt != null ? createdAt : Instant.now();
+        this.status = status != null ? status : ReservationStatus.PENDING;
     }
 }

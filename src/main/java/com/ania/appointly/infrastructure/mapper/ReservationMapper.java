@@ -17,6 +17,7 @@ public class ReservationMapper {
                 .price(reservation.getPrice())
                 .totalPrice(reservation.getTotalPrice())
                 .createdAt(reservation.getCreatedAt())
+                .status(reservation.getStatus())
                 .build();
     }
 
@@ -30,6 +31,7 @@ public class ReservationMapper {
                 .price(entity.getPrice())
                 .totalPrice(entity.getTotalPrice())
                 .createdAt(entity.getCreatedAt())
+                .status(entity.getStatus())
                 .build();
     }
 }
